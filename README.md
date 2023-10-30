@@ -69,4 +69,4 @@ Follow the steps below to establish a conducive working environment:
     ```
 
 ___
-#### _Informatics Engineering @ipvc/estg, 2023-2024_ ####
+#### _Informatics Engineering @ipvc/estg, 2020-2024_ ####
