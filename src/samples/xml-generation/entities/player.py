@@ -12,8 +12,8 @@ class Player:
 
     def to_xml(self):
         el = ET.Element("Player")
-        el.set("id", str(self._id))
-        el.set("name", self._name)
+        el.set("Id", str(self._id))
+        el.set("Name", self._name)
         el.set("Overall", self._overall)
         el.set("Country", str(self._country.get_id()))
         return el

@@ -36,7 +36,7 @@ class CSVtoXMLConverter:
             attr="full_name",
             builder=lambda row: Player(
                 name=row["full_name"],
-                age=row["age"],
+                overall=row["overall"],
                 country=countries[row["nationality"]]
             ),
             after_create=after_creating_player

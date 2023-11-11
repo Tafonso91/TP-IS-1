@@ -16,7 +16,7 @@ class Team:
 
     def to_xml(self):
         el = ET.Element("Team")
-        el.set("id", str(self._id))
+        el.set("Id", str(self._id))
         el.set("name", self._name)
 
         players_el = ET.Element("Players")
