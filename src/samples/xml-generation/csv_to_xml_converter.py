@@ -16,28 +16,28 @@ class CSVtoXMLConverter:
     def to_xml(self):
         # read countries
         countries = self._reader.read_entities(
-            attr="nationality",
-            builder=lambda row: Country(row["nationality"])
+            attr="Country",
+            builder=lambda row: Country(row["Country"])
         )
 
         # read teams
         teams = self._reader.read_entities(
-            attr="Current Club",
-            builder=lambda row: Team(row["Current Club"])
+            attr="Club",
+            builder=lambda row: Team(row["Club"])
         )
 
         # read players
 
         def after_creating_player(player, row):
             # add the player to the appropriate team
-            teams[row["Current Club"]].add_player(player)
+            teams[row["Club"]].add_player(player)
 
         self._reader.read_entities(
-            attr="full_name",
+            attr="Name",
             builder=lambda row: Player(
-                name=row["full_name"],
-                overall=row["overall"],
-                country=countries[row["nationality"]]
+                name=row["Name"],
+                overall=row["Overall"],
+                country=countries[row["Country"]]
             ),
             after_create=after_creating_player
         )
@@ -45,11 +45,11 @@ class CSVtoXMLConverter:
         # generate the final xml
         root_el = ET.Element("Football")
 
-        teams_el = ET.Element("Teams")
+        teams_el = ET.Element("Club")
         for team in teams.values():
             teams_el.append(team.to_xml())
 
-        countries_el = ET.Element("Countries")
+        countries_el = ET.Element("Country")
         for country in countries.values():
             countries_el.append(country.to_xml())
 
