@@ -6,6 +6,8 @@ from csv_reader import CSVReader
 from entities.country import Country
 from entities.team import Team
 from entities.player import Player
+from entities.jogador import Jogador
+from entities.atributo import Atributo
 
 
 class CSVtoXMLConverter:
@@ -42,6 +44,30 @@ class CSVtoXMLConverter:
             after_create=after_creating_player
         )
 
+        # read Jogador
+        jogadores = self._reader.read_entities(
+            attr="Name",
+            builder=lambda row: Jogador(row["Name"])
+        )
+
+         # read atributos
+
+        def after_creating_atributo(atributo, row):
+            # add the player to the appropriate team
+            jogadores[row["Name"]].add_atributo(atributo)
+
+        self._reader.read_entities(
+            attr="Name",
+            builder=lambda row: Atributo(
+                price=row["Price"],
+                height=row["Height"],
+                salary=row["Salary"]
+                
+            ),
+            after_create=after_creating_atributo
+        )
+        
+
         # generate the final xml
         root_el = ET.Element("Football")
 
@@ -53,8 +79,13 @@ class CSVtoXMLConverter:
         for country in countries.values():
             countries_el.append(country.to_xml())
 
+        jogadores_el = ET.Element("Players")
+        for jogador in jogadores.values():
+            jogadores_el.append(jogador.to_xml())
+
         root_el.append(teams_el)
         root_el.append(countries_el)
+        root_el.append(jogadores_el)
 
         return root_el
 
