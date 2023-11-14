@@ -47,25 +47,10 @@ class CSVtoXMLConverter:
         # read Jogador
         jogadores = self._reader.read_entities(
             attr="Name",
-            builder=lambda row: Jogador(row["Name"])
+            builder=lambda row: Jogador(row["Name"], row["Height"], row["Salary"], row["Price"])
         )
 
-         # read atributos
-
-        def after_creating_atributo(atributo, row):
-            # add the player to the appropriate team
-            jogadores[row["Name"]].add_atributo(atributo)
-
-        self._reader.read_entities(
-            attr="Name",
-            builder=lambda row: Atributo(
-                price=row["Price"],
-                height=row["Height"],
-                salary=row["Salary"]
-                
-            ),
-            after_create=after_creating_atributo
-        )
+       
         
 
         # generate the final xml
@@ -79,13 +64,32 @@ class CSVtoXMLConverter:
         for country in countries.values():
             countries_el.append(country.to_xml())
 
+        
         jogadores_el = ET.Element("Players")
-        for jogador in jogadores.values():
-            jogadores_el.append(jogador.to_xml())
+        for jogador_id, jogador in jogadores.items():
+            jogador_el = ET.Element("Player")
+            jogador_el.set("id", str(jogador_id))
 
+            jogador_name_el = ET.Element("Player_Name")
+            jogador_name_el.text = jogador._name
+            jogador_el.append(jogador_name_el)
+
+            height_el = ET.Element("Height")
+            height_el.text = jogador._year
+            jogador_el.append(height_el)
+
+            salary_el = ET.Element("Salary")
+            salary_el.text = jogador._salary
+            jogador_el.append(salary_el)
+
+            price_el = ET.Element("Price")
+            price_el.text = jogador._price
+            jogador_el.append(price_el)
+
+        jogadores_el.append(jogador_el)
         root_el.append(teams_el)
         root_el.append(countries_el)
-        root_el.append(jogadores_el)
+        
 
         return root_el
 
