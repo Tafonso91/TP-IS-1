@@ -53,7 +53,36 @@ class CSVtoXMLConverter:
                 finishing=row["Finishing"],
                 heading_accuracy=row["Heading accuracy"],
                 short_passing=row["Short passing"],
-                volleys=row["Volleys"]
+                volleys=row["Volleys"],
+                dribbling=row["Dribbling"],
+                fk_accuracy=row["FK Accuracy"],
+                long_pass=row["Long passing"],
+                ball_control=row["Ball control"],
+                acceleration=row["Acceleration"],
+                sprint=row["Sprint"],
+                agility=row["Agility"],
+                reactions=row["Reactions"],
+                balance=row["Balance"],
+                shot_power=row["Shot ower"],
+                jump=row["Jumping"],
+                stamina=row["Stamina"],
+                strength=row["Strength"],
+                long_shot=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+                strength=row["Strength"],
+
+
+
+
+
+
 
                 
                 
