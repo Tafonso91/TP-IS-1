@@ -1,0 +1,183 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Football">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Teams">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Club">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Players">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Player" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Information">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:string" name="Name" use="optional"/>
+                                        <xs:attribute type="xs:short" name="Height" use="optional"/>
+                                        <xs:attribute type="xs:string" name="Price" use="optional"/>
+                                        <xs:attribute type="xs:string" name="Salary" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="FootRef" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Main_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Over" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Potential" use="optional"/>
+                                        <xs:attribute type="xs:string" name="Offense" use="optional"/>
+                                        <xs:attribute type="xs:string" name="Defense" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Atack_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Crossing" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Finishing" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Heading" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Short_Pass" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Volleys" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Skill_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Dribble" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Curve" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="FK" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Long_Pass" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Ball_control" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Movement_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Acceleration" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Sprint" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Agility" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Reactions" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Balance" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Power_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Shot_power" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Jump" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Stamina" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Strenght" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Long_shot" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Mental_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Agression" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Positioning" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Vision" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Penalty" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Composure" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Defense_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Interception" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Def.Awareness" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Stand_Tackle" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Slide_Tackle" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="GK_Stats">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:byte" name="Diving" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Handling" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="GK_Kick" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="GK_Positioning" use="optional"/>
+                                        <xs:attribute type="xs:byte" name="Reflexes" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:int" name="Id" use="optional"/>
+                              <xs:attribute type="xs:byte" name="countryRef" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="Id"/>
+                  <xs:attribute type="xs:string" name="Name"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Countries">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Country" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:short" name="Id" use="optional"/>
+                      <xs:attribute type="xs:string" name="Name" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Strong_Foot">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Foot" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:byte" name="Id" use="optional"/>
+                      <xs:attribute type="xs:string" name="Name" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
