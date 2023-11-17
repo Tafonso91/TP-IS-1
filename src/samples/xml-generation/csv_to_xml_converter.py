@@ -45,7 +45,6 @@ class CSVtoXMLConverter:
                 salary=row["Salary"],
                 overall=row["Overall"],
                 potential=row["Potential"],
-                performance=row["Performance"],
                 country_id=countries[row["Country"]].get_id(),
                 strong_foot=row["Strong Foot"],
                 ofensive_performance=row["Offensive performance"],
