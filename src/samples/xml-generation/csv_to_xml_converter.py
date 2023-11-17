@@ -43,10 +43,19 @@ class CSVtoXMLConverter:
                 height=row["Height"],
                 price=row["Price"],
                 salary=row["Salary"],
+                overall=row["Overall"],
+                potential=row["Potential"],
+                performance=row["Performance"],
                 country_id=countries[row["Country"]].get_id(),
                 strong_foot=row["Strong Foot"],
                 ofensive_performance=row["Offensive performance"],
-                defensive_performance=row["Deffensive performance"]
+                defensive_performance=row["Deffensive performance"],
+                crossing=row["Crossing"],
+                finishing=row["Finishing"],
+                heading_accuracy=row["Heading accuracy"],
+                short_passing=row["Short passing"],
+                volleys=row["Volleys"]
+
                 
                 
             ),
