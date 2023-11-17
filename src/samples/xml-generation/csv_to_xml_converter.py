@@ -6,6 +6,8 @@ from csv_reader import CSVReader
 from entities.country import Country
 from entities.team import Team
 from entities.player import Player
+from entities.foot import Foot
+
 
 
 
@@ -21,6 +23,11 @@ class CSVtoXMLConverter:
         countries = self._reader.read_entities(
             attr="Country",
             builder=lambda row: Country(row["Country"])
+        )
+          # read foots
+        feet = self._reader.read_entities(
+            attr="Strong Foot",
+            builder=lambda row: Foot(row["Strong Foot"])
         )
 
         # read teams
@@ -46,7 +53,7 @@ class CSVtoXMLConverter:
                 overall=row["Overall"],
                 potential=row["Potential"],
                 country_id=countries[row["Country"]].get_id(),
-                strong_foot=row["Strong Foot"],
+                foot_id=feet[row["Strong Foot"]].get_id(),
                 ofensive_performance=row["Offensive performance"],
                 defensive_performance=row["Deffensive performance"],
                 crossing=row["Crossing"],
@@ -55,6 +62,7 @@ class CSVtoXMLConverter:
                 short_passing=row["Short passing"],
                 volleys=row["Volleys"],
                 dribbling=row["Dribbling"],
+                curve=row["Curve"],
                 fk_accuracy=row["FK Accuracy"],
                 long_pass=row["Long passing"],
                 ball_control=row["Ball control"],
@@ -63,20 +71,27 @@ class CSVtoXMLConverter:
                 agility=row["Agility"],
                 reactions=row["Reactions"],
                 balance=row["Balance"],
-                shot_power=row["Shot ower"],
+                shot_power=row["Shot power"],
                 jump=row["Jumping"],
                 stamina=row["Stamina"],
                 strength=row["Strength"],
-                long_shot=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
-                strength=row["Strength"],
+                long_shot=row["Long shots"],
+                agression=row["Aggression"],
+                interception=row["Interceptions"],
+                positioning=row["Positioning"],
+                vision=row["Vision"],
+                penalty=row["Penalty"],
+                composure=row["Composure"],
+                defense_awareness=row["Defensive awareness"],
+                stand_tackle=row["Standing tackle"],
+                slide_tackle=row["Sliding tackle"],
+                diving=row["GK Diving"],
+                handling=row["GK Handling"],
+                kicking=row["GK Kicking"],
+                gk_positioning=row["GK Positioning"],
+                reflexes=row["GK Reflexes"],
+
+
 
 
 
@@ -101,8 +116,13 @@ class CSVtoXMLConverter:
         for country in countries.values():
             countries_el.append(country.to_xml())
 
+        foot_el = ET.Element("Strong_Foot")
+        for foot in feet.values():
+            foot_el.append(foot.to_xml())
+
         root_el.append(teams_el)
         root_el.append(countries_el)
+        root_el.append(foot_el)
 
         return root_el
 

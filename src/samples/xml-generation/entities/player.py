@@ -4,7 +4,7 @@ from entities.country import Country
 
 
 class Player:
-    def __init__(self, id, name, height, price, salary,overall, potential, country_id,  strong_foot, ofensive_performance, defensive_performance, crossing, finishing, heading_accuracy, short_passing, volleys, dribbling, curve, fk_accuracy, long_pass, ball_control, acceleration, sprint, agility, reactions, balance, shot_power, jump, stamina, strenght, long_shot, agression, interception, positioning, vision, penalty, composure, defense_awareness,stand_tackle, slide_tackle, diving,handling,kicking, gk_positioning, reflexes):
+    def __init__(self, id, name, height, price, salary,overall, potential, country_id, foot_id, ofensive_performance, defensive_performance, crossing, finishing, heading_accuracy, short_passing, volleys, dribbling, curve, fk_accuracy, long_pass, ball_control, acceleration, sprint, agility, reactions, balance, shot_power, jump, stamina, strength, long_shot, agression, interception, positioning, vision, penalty, composure, defense_awareness,stand_tackle, slide_tackle, diving,handling,kicking, gk_positioning, reflexes):
         self._id = id
         self._name = name
         self._height = height
@@ -13,7 +13,7 @@ class Player:
         self._overall= overall
         self._potential= potential
         self._country_id = country_id
-        self._strong_foot = strong_foot
+        self._foot_id = foot_id
         self._ofensive_performance = ofensive_performance
         self._defensive_performance = defensive_performance
         self._crossing = crossing
@@ -34,7 +34,7 @@ class Player:
         self._shot_power = shot_power
         self._jump = jump
         self._stamina = stamina
-        self._strenght = strenght
+        self._strength = strength
         self._long_shot = long_shot
         self._agression = agression
         self._interception = interception
@@ -69,13 +69,12 @@ class Player:
         info_el.set("Height", str(self._height))
         info_el.set("Price", self._price)
         info_el.set("Salary", self._salary)
-        
+        info_el.set("FootRef", str(self._foot_id))
         player_el.append(info_el)
 
         stats_el = ET.Element("Main_Stats")
         stats_el.set("Over", self._overall)
         stats_el.set("Potential", self._potential)
-        stats_el.set("Foot", self._strong_foot.lower())
         stats_el.set("Offense", self._ofensive_performance.capitalize())
         stats_el.set("Defense", self._defensive_performance.capitalize())
         player_el.append(stats_el)
@@ -89,15 +88,15 @@ class Player:
         player_el.append(atack_el)
 
         skill_el = ET.Element("Skill_Stats")
-        skill_el.set("Crossing", self._crossing)
-        skill_el.set("Finishing", self._finishing)
-        skill_el.set("Heading", self._heading_accuracy)
-        skill_el.set("Short_Pass", self._short_passing)
-        skill_el.set("Volleys", self._volleys)
+        skill_el.set("Dribble", self._dribbling)
+        skill_el.set("Curve", self._curve)
+        skill_el.set("FK", self._fk_accuracy)
+        skill_el.set("Long_Pass", self._long_pass)
+        skill_el.set("Ball_control", self._ball_control)
         player_el.append(skill_el)
 
         movement_el = ET.Element("Movement_Stats")
-        movement_el.set("Acceleration", self._acelaration)
+        movement_el.set("Acceleration", self._acceleration)
         movement_el.set("Sprint", self._sprint)
         movement_el.set("Agility", self._agility)
         movement_el.set("Reactions", self._short_passing)
@@ -108,7 +107,7 @@ class Player:
         power_el.set("Shot_power", self._shot_power)
         power_el.set("Jump", self._jump)
         power_el.set("Stamina", self._stamina)
-        power_el.set("Strenght", self._strenght)
+        power_el.set("Strenght", self._strength)
         power_el.set("Long_shot", self._long_shot)
         player_el.append(power_el)
 
