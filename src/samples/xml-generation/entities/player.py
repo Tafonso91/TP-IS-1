@@ -1,48 +1,41 @@
 import xml.etree.ElementTree as ET
 from entities.country import Country
 
-class Player:
 
-    def __init__(self,id, name, height,price,salary, country_id):
-        
+
+class Player:
+    def __init__(self, id, name, height, price, salary, country_id, strong_foot, ofensive_performance, defensive_performance):
         self._id = id
         self._name = name
         self._height = height
         self._price = price
         self._salary = salary
         self._country_id = country_id
-        
-        
-
+        self._strong_foot = strong_foot
+        self._ofensive_performance = ofensive_performance
+        self._defensive_performance = defensive_performance
 
     def to_xml(self):
-        el = ET.Element("Player")
-        el.set("Id", str(self._id))
+        player_el = ET.Element("Player")
+        player_el.set("Id", str(self._id))
+        player_el.set("countryRef", str(self._country_id))
 
-        name_el = ET.Element("Name")
-        name_el.text = self._name
-        el.append(name_el)
+        info_el = ET.Element("Information")
+        info_el.set("name", self._name)
+        info_el.set("height", str(self._height))
+        info_el.set("price", self._price)
+        info_el.set("salary", self._salary)
+        player_el.append(info_el)
 
-        height_el = ET.Element("Height")
-        height_el.text = str(self._height)
-        el.append(height_el)
+        stats_el = ET.Element("Statistics")
+        stats_el.set("strong_foot", self._strong_foot.lower())
+        stats_el.set("ofensive_performance", self._ofensive_performance.capitalize())
+        stats_el.set("defensive_performance", self._defensive_performance.capitalize())
+        player_el.append(stats_el)
 
-        price_el = ET.Element("Price")
-        price_el.text = self._price
-        el.append(price_el)
-
-        salary_el = ET.Element("Salary")
-        salary_el.text = self._salary
-        el.append(salary_el)
-
-        country_el = ET.Element("CountryId")  # Modificado para incluir o ID do país
-        country_el.text = str(self._country_id)
-        el.append(country_el)
-
-        return el
+        return player_el
 
     def __str__(self):
         return f"{self._name} ({self._id})"
-
 
 Player.counter = 0

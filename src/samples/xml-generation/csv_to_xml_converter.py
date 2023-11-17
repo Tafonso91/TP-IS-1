@@ -43,7 +43,10 @@ class CSVtoXMLConverter:
                 height=row["Height"],
                 price=row["Price"],
                 salary=row["Salary"],
-                 country_id=countries[row["Country"]].get_id()
+                country_id=countries[row["Country"]].get_id(),
+                strong_foot=row["Strong Foot"],
+                ofensive_performance=row["Offensive performance"],
+                defensive_performance=row["Deffensive performance"]
                 
                 
             ),
