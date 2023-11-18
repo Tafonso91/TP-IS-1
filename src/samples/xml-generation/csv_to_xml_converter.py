@@ -1,6 +1,7 @@
 import csv
 import xml.dom.minidom as md
 import xml.etree.ElementTree as ET
+from lxml import etree
 
 from csv_reader import CSVReader
 from entities.country import Country
@@ -130,4 +131,39 @@ class CSVtoXMLConverter:
         xml_str = ET.tostring(self.to_xml(), encoding='utf8', method='xml').decode()
         dom = md.parseString(xml_str)
         return dom.toprettyxml()
+
+    def to_xml_str(self, file_path=None, xsd_path=None):
+        xml_tree = self.to_xml()
+
+        if xsd_path:
+            xml_str = etree.tostring(xml_tree, encoding='utf-8', pretty_print=True).decode('utf-8')
+            validation_result = self.validate_xml_with_xsd(xml_str, xsd_path)
+
+            if validation_result:
+                success_message = f"\nValidaçao feita!"
+                print(success_message)
+
+                if file_path:
+                    with open(file_path, 'w', encoding='utf-8') as file:
+                        file.write(xml_str)
+
+                return xml_str
+            else:
+                error_message = "\nDeu merda, nao vai dar para gerar"
+                print(error_message)
+                return None, error_message
+        else:
+            xml_str = etree.tostring(xml_tree, encoding='utf-8', pretty_print=True).decode('utf-8')
+            return xml_str, None
+
+    def validate_xml_with_xsd(self, xml_str, xsd_path):
+        try:
+            xsd_tree = etree.parse(xsd_path)
+            schema = etree.XMLSchema(xsd_tree)
+            xml_doc = etree.fromstring(xml_str)
+            schema.assertValid(xml_doc)
+            return True
+        except etree.DocumentInvalid as e:
+            print(f"\nError: {e}!")
+            return False
 
