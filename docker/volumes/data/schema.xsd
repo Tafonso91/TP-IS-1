@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Football">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Teams">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Club">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Players">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Player" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Information">
+                                  <xs:complexType>
+                                    <xs:attribute name="Name" type="xs:string"/>
+                                    <xs:attribute name="Height" type="xs:integer"/>
+                                    <xs:attribute name="Price" type="xs:string"/>
+                                    <xs:attribute name="Salary" type="xs:string"/>
+                                    <xs:attribute name="FootRef" type="xs:integer"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Main_Stats">
+                                  <xs:complexType>
+                                    <xs:attribute name="Over" type="xs:integer"/>
+                                    <xs:attribute name="Potential" type="xs:integer"/>
+                                    <xs:attribute name="Offense" type="xs:string"/>
+                                    <xs:attribute name="Defense" type="xs:string"/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="Id" type="xs:integer"/>
+                              <xs:attribute name="countryRef" type="xs:integer"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Id" type="xs:integer"/>
+                  <xs:attribute name="Name" type="xs:string"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Countries">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Country" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="Id" type="xs:integer"/>
+                  <xs:attribute name="Name" type="xs:string"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Strong_Foot">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Foot" maxOccurs="2">
+                <xs:complexType>
+                  <xs:attribute name="Id" type="xs:integer"/>
+                  <xs:attribute name="Name" type="xs:string"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
