@@ -1,9 +1,11 @@
 import signal, sys
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
+from functions.csv_to_xml_converter import CSVtoXMLConverter
 
 from functions.string_length import string_length
 from functions.string_reverse import string_reverse
+
 
 
 class RequestHandler(SimpleXMLRPCRequestHandler):
@@ -13,7 +15,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as server:
     server.register_introspection_functions()
 
-
+    
     def signal_handler(signum, frame):
         print("received signal")
         server.server_close()
@@ -22,6 +24,15 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
 
         print("exiting, gracefully")
         sys.exit(0)
+    converter = CSVtoXMLConverter("/data/fifa_23.csv")
+    xml_str = converter.to_xml_str()  # Obtém a representação XML como string
+
+    # Escreve a string XML em um arquivo
+    with open("/data/fifa_23.xml", "w") as xml_file:
+        xml_file.write(xml_str)
+
+    print("Arquivo XML 'fifa_23.xml' criado com sucesso!")
+    
 
 
     # signals
