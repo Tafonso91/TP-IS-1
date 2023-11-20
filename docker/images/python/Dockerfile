@@ -7,8 +7,11 @@ RUN apk add nodejs npm
 RUN npm install -g npm@10.2.1
 RUN npm install -g nodemon
 
+RUN pip install lxml
+
 # upgrade pip
 RUN python -m pip install --upgrade pip
+
 
 # dependencies from requirements.txt
 COPY ./requirements.txt ./
