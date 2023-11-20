@@ -39,9 +39,15 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
         xml_file.write(xml_str)
 
     print("Arquivo XML 'fifa_23.xml' criado com sucesso!")
+    
+    with open("/data/fifa_23.xml", "r") as xml_file:  
+        xml_content = xml_file.read()
+
+    
     insert_query = "INSERT INTO public.imported_documents (file_name, xml) VALUES (%s, %s)"
-    data = (xml_file, xml_str)
+    data = ("/data/fifa23.xml", xml_str)
     database.insert(insert_query, data)
+
 
     # signals
     signal.signal(signal.SIGTERM, signal_handler)
