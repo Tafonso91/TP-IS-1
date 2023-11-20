@@ -5,6 +5,7 @@ from functions.csv_to_xml_converter import CSVtoXMLConverter
 
 from functions.string_length import string_length
 from functions.string_reverse import string_reverse
+from database.database import Database
 
 
 
@@ -14,7 +15,9 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 
 with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as server:
     server.register_introspection_functions()
-
+    database=Database()
+    
+    
     
     def signal_handler(signum, frame):
         print("received signal")
@@ -24,6 +27,10 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
 
         print("exiting, gracefully")
         sys.exit(0)
+
+    csv_file = "/data/fifa23.csv"
+    xml_file = "/data/fifa23.xml"
+    xsd_file = "/data/fifa23.xsd"
     converter = CSVtoXMLConverter("/data/fifa_23.csv")
     xml_str = converter.to_xml_str()  # Obtém a representação XML como string
 
@@ -32,8 +39,9 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
         xml_file.write(xml_str)
 
     print("Arquivo XML 'fifa_23.xml' criado com sucesso!")
-    
-
+    insert_query = "INSERT INTO public.imported_documents (file_name, xml) VALUES (%s, %s)"
+    data = (xml_file, xml_str)
+    database.insert(insert_query, data)
 
     # signals
     signal.signal(signal.SIGTERM, signal_handler)

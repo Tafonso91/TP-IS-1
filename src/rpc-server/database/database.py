@@ -1,4 +1,4 @@
-import psycopg
+import psycopg2
 
 class Database:
     def __init__(self):
@@ -8,7 +8,7 @@ class Database:
         self.password = "is"
         self.host = "is-db"
         self.port = "5432"
-        self.database = "xml-rpc-project"
+        self.database = "is"
 
     def connect(self):
         if self.connection is None:
