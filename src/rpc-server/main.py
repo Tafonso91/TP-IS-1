@@ -8,6 +8,8 @@ from functions.string_length import string_length
 from functions.string_reverse import string_reverse
 from database.database import Database
 
+from functions.queries import QueryFunctions
+
 
 
 
@@ -17,6 +19,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 
 with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as server:
     server.register_introspection_functions()
+    query_functions = QueryFunctions()
     database=Database()
     
     
@@ -54,6 +57,10 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     data = ("/data/fifa23.xml", xml_str)
     database.insert(insert_query, data)
 
+    
+  
+
+
 
     # signals
     signal.signal(signal.SIGTERM, signal_handler)
@@ -61,6 +68,7 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     signal.signal(signal.SIGINT, signal_handler)
 
     # register both functions
+    server.register_function(query_functions.buscar_clubes)
     server.register_function(string_reverse)
     server.register_function(string_length)
 

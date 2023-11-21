@@ -21,7 +21,7 @@ class Database:
                     database=self.database
                 )
                 self.cursor = self.connection.cursor()
-                print("\nConnection established successfully.")
+                print("\nConnection estabalecida com sucesso.")
             except psycopg2.Error as error:
                 print(f"\nError: {error}")
 
@@ -30,7 +30,7 @@ class Database:
             try:
                 self.cursor.close()
                 self.connection.close()
-                print("\nDisconnected successfully from the database.")
+                print("\nDisconectado com sucesso.")
             except psycopg2.Error as e:
                 print(f"\nError: {e}")
 
@@ -39,7 +39,7 @@ class Database:
         try:
             self.cursor.execute(sql_query, data)
             self.connection.commit()
-            print("\nThe query was successfully executed.")
+            print("\nA query foi bem executada.")
         except psycopg2.Error as error:
             print(f"\nError: {error}")
 
