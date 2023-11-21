@@ -32,7 +32,7 @@ class Database:
                 self.connection.close()
                 print("\nDisconectado com sucesso.")
             except psycopg2.Error as e:
-                print(f"\nError: {e}")
+                print(f"\nErro: {e}")
 
     def insert(self, sql_query, data):
         self.connect()
@@ -43,14 +43,14 @@ class Database:
         except psycopg2.Error as error:
             print(f"\nError: {error}")
 
-    def selectAll(self, query):
+    def selectTudo(self, query):
         self.connect()
         with self.cursor as cursor:
             cursor.execute(query)
             result = [row for row in cursor.fetchall()]
         return result
 
-    def selectOne(self, query, data):
+    def selectUm(self, query, data):
         self.connect()
         with self.cursor as cursor:
             cursor.execute(query, data)
