@@ -38,6 +38,8 @@ class QueryFunctions:
             if not pais in list_paises:
                 list_paises.append(pais)
 
+        return list_paises
+
     def buscar_pe(self):
         database = Database()
         list_pe = []

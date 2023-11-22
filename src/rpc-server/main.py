@@ -42,20 +42,36 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
 
    
    
-        
+    # Carrega o schema XSD
+with open(xsd_file, 'r') as schema_file:
+    schema_doc = ETREE.parse(schema_file)
+    schema = ETREE.XMLSchema(schema_doc)
+
+# Carrega o XML como um objeto lxml
+xml_doc = ETREE.fromstring(xml_str)
+
+# Valida o XML contra o schema
+if schema.validate(xml_doc):    
     # Escreve a string XML em um arquivo
     with open("/data/fifa_23.xml", "w") as xml_file:
         xml_file.write(xml_str)
-
-    print("Arquivo XML 'fifa_23.xml' criado com sucesso!")
-
+    print("Validação concluída com sucesso!") 
+    print("Arquivo XML 'fifa_23.xml' criado com sucesso!") 
     with open("/data/fifa_23.xml", "r") as xml_file:  
         xml_content = xml_file.read()
+        
 
     
     insert_query = "INSERT INTO public.imported_documents (file_name, xml) VALUES (%s, %s)"
-    data = ("/data/fifa23.xml", xml_str)
+    data = ("/data/fifa23.xml", xml_content)
     database.insert(insert_query, data)
+else:
+    # Se o XML não é válido, imprime o(s) erro(s)
+    print("Erro de validação XML:")
+    for error in schema.error_log:
+        print(error)
+        
+  
 
     
   

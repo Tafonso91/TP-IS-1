@@ -4,6 +4,11 @@ print("connecting to server...")
 server = xmlrpc.client.ServerProxy('http://is-rpc-server:9000')
 
 
+    
+
+   
+
+
 
 def listar_clubes():
     try:
@@ -56,7 +61,7 @@ def listar_jogadores():
 
 def main():
     while True:
-        print("\n-----> Menu <------")
+        print("\n***** Queries *****")
         print("1 -Listagem dos clubes")
         print("2 -Listagem dos países")
         print("3 -Listagem dos pés preferidos")
