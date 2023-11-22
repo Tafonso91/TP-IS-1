@@ -60,16 +60,18 @@ def listar_jogadores():
 
 def buscar_estatisticas_jogador():
     try:
-        nome_jogador = input("Insira o nome do jogador: ")
+        nome_jogador = input("\nInsira o nome do jogador: ")
         estatisticas = server.buscar_estatisticas_jogador(nome_jogador)
         if estatisticas:
-            print(f"\nEstatísticas para {nome_jogador}:")
+            print(f"\nEstatísticas principais do jogador {nome_jogador}:")
             for stat, valor in estatisticas.items():
                 print(f"- {stat}: {valor}")
         else:
-            print("Jogador não encontrado.")
+            print("Nada foi encontrado.")
     except Exception as e:
         print(f"Erro: {e}")
+
+
 
 
 def main():
@@ -79,7 +81,8 @@ def main():
         print("2 -Listagem dos países")
         print("3 -Listagem dos pés preferidos")
         print("4 -10 jogadores com maior overall")
-        print("5 -Pesquisar stats dum jogador")
+        print("5 -Estatística do jogador")
+        
         print("0 - Sair")
 
         option = input("Escolha uma opção: ")
@@ -99,9 +102,10 @@ def main():
         if option == '4':
             listar_jogadores()
             continue
+
         if option == '5':
             buscar_estatisticas_jogador()
-            continue   
+            continue
         
         elif option == '0':
             print("\nA sair!")

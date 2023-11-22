@@ -1,5 +1,6 @@
 
 from database.database import Database
+import psycopg2
 
 class QueryFunctions:
     def __init__(self):
@@ -72,20 +73,21 @@ class QueryFunctions:
     
     def buscar_estatisticas_jogador(self, nome_jogador):
         database = Database()
-        try:
-            query = """
-            SELECT unnest(xpath('//Players/Player[Information/@Name=$$'{}'$$]/*/@*', xml)) as result 
-            FROM imported_documents
-            """.format(nome_jogador)
-            dados = database.selectTudo(query)
-        finally:
-            database.disconnect()
+        # Escape single quotes in the player's name
+        nome_jogador = nome_jogador.replace("'", "''")
+        query =  '''
+                SELECT unnest(xpath(format('//Players/Player[Information/@Name=''%s'']/Main_Stats/@*', %s), xml)) as result 
+                FROM imported_documents
+                '''
+        dados = database.selectTudo(query, (nome_jogador, nome_jogador))
+        database.disconnect()
 
-        if not dados:
-            return "Jogador não encontrado."
-
-        estatisticas_jogador = {}
+        estatisticas = {}
         for dado in dados:
-            estatisticas_jogador[dado[0]] = dado[1]
+            estatisticas[dado[0]] = dado[1]
 
-        return estatisticas_jogador
+        return estatisticas
+
+
+    
+   

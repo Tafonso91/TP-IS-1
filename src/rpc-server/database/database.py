@@ -43,10 +43,13 @@ class Database:
         except psycopg2.Error as error:
             print(f"\nError: {error}")
 
-    def selectTudo(self, query):
+    def selectTudo(self, query, data=None):
         self.connect()
         with self.cursor as cursor:
-            cursor.execute(query)
+            if data is None:
+                cursor.execute(query)
+            else:
+                cursor.execute(query, data)
             result = [row for row in cursor.fetchall()]
         return result
 
