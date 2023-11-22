@@ -71,22 +71,19 @@ class QueryFunctions:
 
         return list_jogadores
     
-    def buscar_estatisticas_jogador(self, nome_jogador):
+    @staticmethod
+    def buscar_jogadores(nome_equipa):
         database = Database()
-        # Escape single quotes in the player's name
-        nome_jogador = nome_jogador.replace("'", "''")
-        query =  '''
-                SELECT unnest(xpath(format('//Players/Player[Information/@Name=''%s'']/Main_Stats/@*', %s), xml)) as result 
-                FROM imported_documents
-                '''
-        dados = database.selectTudo(query, (nome_jogador, nome_jogador))
-        database.disconnect()
+        query = """
+        SELECT unnest(xpath('//Teams/Club[@Name="{}"]/Players/Player/Information/@Name', xml))::text AS player_name
+        FROM imported_documents
+        """.format(nome_equipa)
 
-        estatisticas = {}
-        for dado in dados:
-            estatisticas[dado[0]] = dado[1]
 
-        return estatisticas
+        result = database.selectTudo(query)
+        jogadores = [jogador[0] for jogador in result]
+
+        return jogadores
 
 
     
