@@ -69,3 +69,23 @@ class QueryFunctions:
         list_jogadores = list_jogadores[:10]
 
         return list_jogadores
+    
+    def buscar_estatisticas_jogador(self, nome_jogador):
+        database = Database()
+        try:
+            query = """
+            SELECT unnest(xpath('//Players/Player[Information/@Name=$$'{}'$$]/*/@*', xml)) as result 
+            FROM imported_documents
+            """.format(nome_jogador)
+            dados = database.selectTudo(query)
+        finally:
+            database.disconnect()
+
+        if not dados:
+            return "Jogador não encontrado."
+
+        estatisticas_jogador = {}
+        for dado in dados:
+            estatisticas_jogador[dado[0]] = dado[1]
+
+        return estatisticas_jogador
