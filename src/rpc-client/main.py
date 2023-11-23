@@ -71,6 +71,18 @@ def buscar_jogador():
     except Exception as e:
         print(f"Erro: {e}")
 
+def promessas_tugas():
+    try:
+        promessas = server.buscar_promessas_portugal()
+        if promessas:
+            print("\nPromessas portuguesas:")
+            for promessa in promessas:
+                print(f"- {promessa}")
+        else:
+            print("Nada foi encontrado.")
+    except Exception as e:
+        print(f"Erro: {e}")
+
 
 
 
@@ -82,6 +94,7 @@ def main():
         print("3 -Listagem dos pés preferidos")
         print("4 -10 jogadores com maior overall")
         print("5 -Buscar jogadores por equipa")
+        print("6 -Promessas portuguesas")
         print("0 - Sair")
 
         option = input("Escolha uma opção: ")
@@ -106,6 +119,10 @@ def main():
             buscar_jogador()
             continue
         
+        if option == '6':
+            promessas_tugas()
+            continue
+
         elif option == '0':
             print("\nA sair!")
             break

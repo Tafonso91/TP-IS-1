@@ -71,6 +71,22 @@ class QueryFunctions:
 
         return list_jogadores
     
+    def buscar_promessas_portugal(self):
+        database = Database()
+        list_promessas = []
+
+        dados = database.selectTudo("SELECT (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Information/@Name', xml))::text[] as nome, (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Main_Stats/@Potential', xml))::text::integer[] as potencial FROM imported_documents")
+        database.disconnect()
+
+        for nome, potencial in dados:
+            for jogador_nome, jogador_potencial in zip(nome, potencial):
+                list_promessas.append((jogador_potencial, jogador_nome))
+
+        # Ordenar a lista de promessas por potencial
+        list_promessas.sort(reverse=True)
+
+        return list_promessas
+
     @staticmethod
     def buscar_jogadores(nome_equipa):
         database = Database()
@@ -84,6 +100,7 @@ class QueryFunctions:
         jogadores = [jogador[0] for jogador in result]
 
         return jogadores
+
 
 
     

@@ -84,6 +84,7 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     server.register_function(query_functions.buscar_pe)
     server.register_function(query_functions.buscar_top_jogadores)
     server.register_function(query_functions.buscar_jogadores)
+    server.register_function(query_functions.buscar_promessas_portugal)
     server.register_function(string_reverse)
     server.register_function(string_length)
 
