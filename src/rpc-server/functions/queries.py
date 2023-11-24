@@ -14,7 +14,7 @@ class QueryFunctions:
         finally:
             database.disconnect()
     
-    def buscar_clubes(self):
+    def lista_clubes(self):
         database = Database()
         list_clubes = []
 
@@ -28,7 +28,7 @@ class QueryFunctions:
         return list_clubes
     
 
-    def buscar_paises(self):
+    def lista_paises(self):
         database = Database()
         list_paises = []
 
@@ -41,7 +41,7 @@ class QueryFunctions:
 
         return list_paises
 
-    def buscar_pe(self):
+    def lista_pe(self):
         database = Database()
         list_pe = []
 
@@ -54,7 +54,7 @@ class QueryFunctions:
 
         return list_pe
     
-    def buscar_top_jogadores(self):
+    def lista_top_jogadores(self):
         database = Database()
         list_jogadores = []
 
@@ -71,7 +71,7 @@ class QueryFunctions:
 
         return list_jogadores
     
-    def buscar_promessas_portugal(self):
+    def lista_promessas_portugal(self):
         database = Database()
         list_promessas = []
 
@@ -88,7 +88,7 @@ class QueryFunctions:
         return list_promessas
 
     @staticmethod
-    def buscar_jogadores(nome_equipa):
+    def lista_jogadores(nome_equipa):
         database = Database()
         query = """
         SELECT unnest(xpath('//Teams/Club[@Name="{}"]/Players/Player/Information/@Name', xml))::text AS player_name
@@ -100,6 +100,58 @@ class QueryFunctions:
         jogadores = [jogador[0] for jogador in result]
 
         return jogadores
+
+
+    @staticmethod
+    def lista_estatisticas_jogador(nome_jogador, tipo_estatistica):
+        database = Database()
+        if tipo_estatistica == 'ataque':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Atack_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)
+        elif tipo_estatistica == 'informação':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Information', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)
+        elif tipo_estatistica == 'principal':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Main_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)
+        elif tipo_estatistica == 'skill':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Skill_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)
+        elif tipo_estatistica == 'movimento':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Movement_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)
+        elif tipo_estatistica == 'força':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Power_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)
+        elif tipo_estatistica == 'mental':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Mental_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador)   
+        elif tipo_estatistica == 'defesa':
+            query = """
+            SELECT unnest(xpath('//Teams/Club/Players/Player[Information/@Name="{}"]/Defense_Stats', xml))::text AS stats
+            FROM imported_documents
+            """.format(nome_jogador) 
+        else:
+            return "Tipo de estatística inválido. Escolha uma opção válida."
+
+        result = database.selectTudo(query)
+        estatisticas = [estatistica[0] for estatistica in result]
+
+        return estatisticas
 
 
 
