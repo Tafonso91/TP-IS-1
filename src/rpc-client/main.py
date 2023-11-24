@@ -88,10 +88,10 @@ def promessas_tugas():
 def pesquisar_stat():
   try:
     nome_jogador = input("Insira o nome do jogador: ")
-    tipo_estatistica = input("Insira o tipo de estatística que deseja ver desse mesmo jogador(insira |'ataque'|'guarda-redes'|'informação'|'principal'|'skill'|'movimento'|'força'||'mental'||'defesa'|): ")
+    tipo_estatistica = input(f"Insira o tipo de estatística que deseja ver do {nome_jogador} (insira |'ataque'|'guarda-redes'|'informação'|'principal'|'skill'|'movimento'|'força'||'mental'||'defesa'|): ")
     estatisticas = server.lista_estatisticas_jogador(nome_jogador, tipo_estatistica)
     if estatisticas:
-         print("\nEstatísticas do jogador:")
+         print(f"\nEstatísticas do {nome_jogador}:")
          for estatistica in estatisticas:
             element = ET.fromstring(estatistica)
             for attr, value in element.attrib.items():
