@@ -91,6 +91,7 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     server.register_function(query_functions.lista_jogadores)
     server.register_function(query_functions.lista_promessas_portugal)
     server.register_function(query_functions.lista_estatisticas_jogador)
+    server.register_function(query_functions.lista_jogadores_benfica)
     server.register_function(documento.importar_documento)
     server.register_function(documento.listar_documentos)
     server.register_function(documento.delete_documentos)

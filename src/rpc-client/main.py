@@ -96,11 +96,18 @@ def promessas_tugas():
         if promessas:
             print("\nPromessas portuguesas:")
             for promessa in promessas:
-                print(f"- {promessa}")
+                print(f"Nome: {promessa[1]}")
+                print(f"Overall: {promessa[2]}")
+                print(f"Potencial: {promessa[0]}")
+                print(f"Altura: {promessa[3]}cm")
+                print(f"Preço: {promessa[4]}")
+                print(f"Salário: {promessa[5]}\n")
         else:
             print("Nada foi encontrado.")
     except Exception as e:
         print(f"Erro: {e}")
+
+
 
 
 
@@ -144,6 +151,7 @@ def main():
         print("7 -Promessas portuguesas")
         print("8 -Pesquisar estatística jogador")
         
+        
 
         print("0 - Sair")
 
@@ -180,6 +188,8 @@ def main():
         if option == '8':
             pesquisar_stat()
             continue
+
+        
 
         
 

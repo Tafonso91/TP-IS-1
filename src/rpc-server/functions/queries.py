@@ -89,17 +89,29 @@ class QueryFunctions:
         database = Database()
         list_promessas = []
 
-        dados = database.selectTudo("SELECT (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Information/@Name', xml))::text[] as nome, (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Main_Stats/@Potential', xml))::text::integer[] as potencial FROM imported_documents")
+        dados = database.selectTudo("""
+            SELECT 
+                (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Information/@Name', xml))::text[] as nome, 
+                (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Main_Stats/@Potential', xml))::text::integer[] as potencial, 
+                (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Main_Stats/@Over', xml))::text::integer[] as overall,
+                (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Information/@Height', xml))::text::integer[] as height,
+                (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Information/@Price', xml))::text[] as price,
+                (xpath('//Teams/Club/Players/Player[Main_Stats/@Potential > 84 and @countryRef=10]/Information/@Salary', xml))::text[] as salary
+            FROM imported_documents
+        """)
         database.disconnect()
 
-        for nome, potencial in dados:
-            for jogador_nome, jogador_potencial in zip(nome, potencial):
-                list_promessas.append((jogador_potencial, jogador_nome))
+        for nome, potencial, overall, height, price, salary in dados:
+            for jogador_nome, jogador_potencial, jogador_overall, jogador_height, jogador_price, jogador_salary in zip(nome, potencial, overall, height, price, salary):
+                list_promessas.append((jogador_potencial, jogador_nome, jogador_overall, jogador_height, jogador_price, jogador_salary))
 
         # Ordenar a lista de promessas por potencial
         list_promessas.sort(reverse=True)
 
         return list_promessas
+
+
+
 
     @staticmethod
     def lista_jogadores(nome_equipa):
@@ -166,7 +178,7 @@ class QueryFunctions:
         estatisticas = [estatistica[0] for estatistica in result]
 
         return estatisticas
-
+   
 
 
     
