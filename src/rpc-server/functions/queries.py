@@ -27,6 +27,20 @@ class QueryFunctions:
 
         return list_clubes
     
+    def lista_jogadores(self):
+        database = Database()
+        list_jogadores = []
+
+        dados = database.selectTudo("SELECT unnest(xpath('//Player/Information/@Name', xml)) as result FROM imported_documents")
+        database.disconnect()
+
+        for jogador in dados:
+            if not jogador in list_jogadores:
+                list_jogadores.append(jogador)
+
+        return list_jogadores
+
+    
 
     def lista_paises(self):
         database = Database()
