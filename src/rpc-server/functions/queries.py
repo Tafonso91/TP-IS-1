@@ -27,7 +27,7 @@ class QueryFunctions:
 
         return list_clubes
     
-    def lista_jogadores(self):
+    def lista_todos_jogadores(self):
         database = Database()
         list_jogadores = []
 

@@ -9,6 +9,7 @@ from functions.string_reverse import string_reverse
 from database.database import Database
 
 from functions.queries import QueryFunctions
+from functions.documento import Documento
 
 
 
@@ -20,6 +21,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as server:
     server.register_introspection_functions()
     query_functions = QueryFunctions()
+    documento=Documento()
     database=Database()
     
     
@@ -35,7 +37,7 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     
         
     csv_file = "/data/fifa23.csv"
-    xml_file = "/data/fifa23.xml"
+    ficheiro_xml = "/data/fifa23.xml"
     xsd_file = "/data/schema.xsd"
     converter = CSVtoXMLConverter("/data/fifa_23.csv")
     xml_str = converter.to_xml_str()  # Obtém a representação XML como string
@@ -83,12 +85,15 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     # register both functions
     server.register_function(query_functions.lista_clubes)
     server.register_function(query_functions.lista_paises)
-    server.register_function(query_functions.lista_jogadores)
+    server.register_function(query_functions.lista_todos_jogadores)
     server.register_function(query_functions.lista_pe)
     server.register_function(query_functions.lista_top_jogadores)
     server.register_function(query_functions.lista_jogadores)
     server.register_function(query_functions.lista_promessas_portugal)
     server.register_function(query_functions.lista_estatisticas_jogador)
+    server.register_function(documento.importar_documento)
+    server.register_function(documento.listar_documentos)
+    server.register_function(documento.delete_documentos)
     server.register_function(string_reverse)
     server.register_function(string_length)
 

@@ -21,7 +21,7 @@ def listar_clubes():
 # Function to list all players
 def listar_jogadores():
     try:
-        jogadores = server.lista_jogadores()
+        jogadores = server.lista_todos_jogadores()
         if jogadores:
             print("\nLista dos jogadores:")
             for jogador in jogadores:
@@ -103,6 +103,9 @@ def promessas_tugas():
         print(f"Erro: {e}")
 
 
+
+
+
 # Function to search for a player's statistics
 def pesquisar_stat():
     try:
@@ -126,6 +129,9 @@ Escolha uma opção: """)
         print(f"Erro: {e}")
 
 
+
+
+
 def main():
     while True:
         print("\n***** Queries *****")
@@ -137,6 +143,8 @@ def main():
         print("6 -Pesquisar jogadores por equipa")
         print("7 -Promessas portuguesas")
         print("8 -Pesquisar estatística jogador")
+        
+
         print("0 - Sair")
 
         option = input("Escolha uma opção: ")
@@ -172,6 +180,8 @@ def main():
         if option == '8':
             pesquisar_stat()
             continue
+
+        
 
         elif option == '0':
             print("\nA sair!")
