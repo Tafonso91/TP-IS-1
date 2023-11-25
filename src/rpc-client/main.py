@@ -135,7 +135,21 @@ Escolha uma opção: """)
     except Exception as e:
         print(f"Erro: {e}")
 
+def importa_documento():
+    
+        caminho_xml = input("\nIntroduz o caminho do xml: ")
 
+        if not caminho_xml:
+            print("Tenta outra vez")
+            return 0
+
+        with open(caminho_xml, 'r', encoding='utf-8') as xml_file:
+            xml_content = xml_file.read()
+
+        dados = server.importar_documento(xml_content, caminho_xml)
+        print(dados)
+
+    
 
 
 
@@ -150,6 +164,7 @@ def main():
         print("6 -Pesquisar jogadores por equipa")
         print("7 -Promessas portuguesas")
         print("8 -Pesquisar estatística jogador")
+        print("9 -Importar para a BD")
         
         
 
@@ -189,6 +204,9 @@ def main():
             pesquisar_stat()
             continue
 
+        if option == '9':
+            importa_documento()
+            continue
         
 
         

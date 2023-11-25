@@ -1,7 +1,7 @@
 from database.database import Database
 
 class Documento:
-    def importar_documento(ficheiro_xml,xml_content):
+    def importar_documento(self,ficheiro_xml,xml_content):
         
             database = Database()
 
@@ -11,7 +11,9 @@ class Documento:
             database.insert(insert_query, data)
             
 
-            return "Mandou pa BD!"
+            return "Mandou para a BD!"
+        
+        
 
     def listar_documentos():
         

@@ -72,10 +72,7 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
         print("Erro de validação XML:")
         print(e)
 
-    insert_query = "INSERT INTO public.imported_documents (file_name, xml) VALUES (%s, %s)"
-    data = ("/data/fifa23.xml", xml_content)
-    database.insert(insert_query, data)
-    print("Mandou pa BD!")
+    
 
     # signals
     signal.signal(signal.SIGTERM, signal_handler)
@@ -91,10 +88,11 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     server.register_function(query_functions.lista_jogadores)
     server.register_function(query_functions.lista_promessas_portugal)
     server.register_function(query_functions.lista_estatisticas_jogador)
-    server.register_function(query_functions.lista_jogadores_benfica)
+    
     server.register_function(documento.importar_documento)
     server.register_function(documento.listar_documentos)
     server.register_function(documento.delete_documentos)
+
     server.register_function(string_reverse)
     server.register_function(string_length)
 
