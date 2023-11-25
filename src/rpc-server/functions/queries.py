@@ -105,7 +105,7 @@ class QueryFunctions:
             for jogador_nome, jogador_potencial, jogador_overall, jogador_height, jogador_price, jogador_salary in zip(nome, potencial, overall, height, price, salary):
                 list_promessas.append((jogador_potencial, jogador_nome, jogador_overall, jogador_height, jogador_price, jogador_salary))
 
-        # Ordenar a lista de promessas por potencial
+        
         list_promessas.sort(reverse=True)
 
         return list_promessas
@@ -179,6 +179,11 @@ class QueryFunctions:
 
         return estatisticas
    
+
+   
+
+
+
 
 
     

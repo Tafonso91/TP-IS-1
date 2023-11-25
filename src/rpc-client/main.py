@@ -149,73 +149,97 @@ def importa_documento():
         dados = server.importar_doc(xml_content, caminho)
         print(dados)
 
-    
-
+def listar_jogadores_benfica():
+    try:
+        jogadores_benfica = server.lista_jogadores_benfica()
+        if jogadores_benfica:
+            print("\nLista dos jogadores do Benfica:")
+            for jogador in jogadores_benfica:
+                print(f"- {jogador}")
+        else:
+            print("Nada foi encontrado.")
+    except Exception as e:
+        print(f"Erro: {e}")
 
 
 def main():
-    while True:
-        print("\n***** Queries *****")
-        print("1 -Listagem dos clubes")
-        print("2 -Listagem dos países")
-        print("3 -Listagem dos jogadores")
-        print("4 -Listagem dos pés preferidos")
-        print("5 -10 jogadores com maior overall")
-        print("6 -Pesquisar jogadores por equipa")
-        print("7 -Promessas portuguesas")
-        print("8 -Pesquisar estatística jogador")
-        print("9 -Importar para a BD")
-        
-        
 
+       while True:
+        print("\n***** Menu Principal *****")
+        print("1 - Queries")
+        print("2 - XML")
         print("0 - Sair")
 
-        option = input("Escolha uma opção: ")
+        main_option = input("Escolhe uma opção: ")
 
-        if option == '1':
-            listar_clubes()
-            continue
-
-        if option == '2':
-            listar_paises()
-            continue
-
-        if option == '3':
-            listar_jogadores()
-            continue
-
-        if option == '4':
-            listar_pe()
-            continue
-
-        if option == '5':
-            listar_top_jogadores()
-            continue
-
-        if option == '6':
-            pesquisar_jogador()
-            continue
-
-        if option == '7':
-            promessas_tugas()
-            continue
-
-        if option == '8':
-            pesquisar_stat()
-            continue
-
-        if option == '9':
-            importa_documento()
-            continue
-        
-
-        
-
-        elif option == '0':
+        if main_option == '1':
+            queries_menu()
+        elif main_option == '2':
+            xml_menu()
+        elif main_option == '0':
             print("\nA sair!")
             break
         else:
-            print("\nOpção errada ,insira outro número.")
+            print("\nOpção errada, escolhe outro número.")
 
+def queries_menu():
+    while True:
+        print("\n***** Queries *****")
+        print("1 - Listagem dos clubes")
+        print("2 - Listagem dos países")
+        print("3 - Listagem dos jogadores")
+        print("4 - Listagem dos pés preferidos")
+        print("5 - 10 jogadores com maior overall")
+        print("6 - Pesquisar jogadores por equipa")
+        print("7 - Promessas portuguesas")
+        print("8 - Pesquisar estatística jogador")
+        print("0 - Voltar ao Menu Principal")
+
+        query_option = input("Escolhe uma opção: ")
+
+        if query_option == '1':
+            listar_clubes()
+        elif query_option == '2':
+            listar_paises()
+        elif query_option == '3':
+            listar_jogadores()
+        elif query_option == '4':
+            listar_pe()
+        elif query_option == '5':
+            listar_top_jogadores()
+        elif query_option == '6':
+            pesquisar_jogador()
+        elif query_option == '7':
+            promessas_tugas()
+        elif query_option == '8':
+            pesquisar_stat()
+        elif query_option == '0':
+            print("\nEstou a voltar ao Menu Principal.")
+            break
+        else:
+            print("\nOpção errada, escolhe outro número.")
+
+def xml_menu():
+    while True:
+        print("***** XML *****")
+        print("1 - Importar para a BD")
+        print("2 - Listar Documentos")
+        print("3 - Soft Delete")
+        print("0 - Voltar ao Menu Principal")
+
+        xml_option = input("Escolhe uma opção: ")
+
+        if xml_option == '1':
+            importa_documento()
+        elif xml_option == '2':
+            importa_documento()
+        elif xml_option == '3':
+            importa_documento()
+        elif xml_option == '0':
+            print("\nEstou a voltar ao Menu Principal.")
+            break
+        else:
+            print("\nOpção errada, escolhe outro número.")
+    
 if __name__ == "__main__":
     main()

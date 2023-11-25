@@ -29,7 +29,7 @@ class Documento:
     
             database = Database()
 
-            database.softdelete(ficheiro)
+            database.soft_delete(ficheiro)
 
             return "Soft Delete aplicado com sucesso."
 
