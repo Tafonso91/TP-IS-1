@@ -1,7 +1,7 @@
 from database.database import Database
 
 class Documento:
-    def importar_documento(self,ficheiro_xml,xml_content):
+    def importar_doc(self,ficheiro_xml,xml_content):
         
             database = Database()
 
@@ -15,7 +15,7 @@ class Documento:
         
         
 
-    def listar_documentos():
+    def listar_doc():
         
             database = Database()
             dados = database.selectTudo(
@@ -25,7 +25,7 @@ class Documento:
 
     
 
-    def delete_documentos(ficheiro):
+    def delete_doc(ficheiro):
     
             database = Database()
 

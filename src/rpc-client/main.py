@@ -137,16 +137,16 @@ Escolha uma opção: """)
 
 def importa_documento():
     
-        caminho_xml = input("\nIntroduz o caminho do xml: ")
+        caminho = input("\nIntroduz o caminho do xml: ")
 
-        if not caminho_xml:
+        if not caminho:
             print("Tenta outra vez")
             return 0
 
-        with open(caminho_xml, 'r', encoding='utf-8') as xml_file:
+        with open(caminho, 'r', encoding='utf-8') as xml_file:
             xml_content = xml_file.read()
 
-        dados = server.importar_documento(xml_content, caminho_xml)
+        dados = server.importar_doc(xml_content, caminho)
         print(dados)
 
     
