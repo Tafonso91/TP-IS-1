@@ -60,11 +60,11 @@ class Database:
             result = cursor.fetchone()
         return result
     
-    def soft_delete(self, id):
+    def soft_delete(self, file_name):
         self.connect()
         try:
-            query = f"UPDATE imported_documents SET deleted = TRUE WHERE id = %s AND deleted = FALSE"
-            self.cursor.execute(query, (id,))
+            query = "UPDATE imported_documents SET delete = now() WHERE file_name = %s"
+            self.cursor.execute(query, (file_name,))
             self.connection.commit()
             print("\nThe record was successfully soft deleted.")
         except psycopg2.Error as error:

@@ -92,7 +92,7 @@ with SimpleXMLRPCServer(('0.0.0.0', 9000), requestHandler=RequestHandler) as ser
     
     server.register_function(documento.importar_doc)
     server.register_function(documento.listar_doc)
-    server.register_function(documento.delete_doc)
+    server.register_function(documento.soft_delete_by_filename)
 
     server.register_function(string_reverse)
     server.register_function(string_length)

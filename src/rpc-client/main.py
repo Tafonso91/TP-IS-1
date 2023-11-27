@@ -160,7 +160,14 @@ def listar_jogadores_benfica():
             print("Nada foi encontrado.")
     except Exception as e:
         print(f"Erro: {e}")
+def delete_file():
+    file_name = input("\nInsira o nome do ficheiro a ser deletado: ")
 
+    try:
+        result = server.soft_delete_by_filename(file_name)
+        print(result)
+    except Exception as e:
+        print(f"Erro ao tentar deletar o ficheiro: {e}")
 
 def main():
 
@@ -234,7 +241,7 @@ def xml_menu():
         elif xml_option == '2':
             importa_documento()
         elif xml_option == '3':
-            importa_documento()
+            delete_file()
         elif xml_option == '0':
             print("\nEstou a voltar ao Menu Principal.")
             break
