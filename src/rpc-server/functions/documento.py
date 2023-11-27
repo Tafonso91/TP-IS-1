@@ -25,7 +25,7 @@ class Documento:
 
     
 
-    def soft_delete_by_filename(file_name):
+    def soft_delete_by_filename(self, file_name):
         database = Database()
         database.soft_delete(file_name)
         return "Soft Delete aplicado com sucesso."
